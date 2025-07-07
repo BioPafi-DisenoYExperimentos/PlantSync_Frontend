@@ -30,8 +30,8 @@ form {
     gap: 1rem;
 }
 
-input[type="text"],
-input[type="date"] {
+input[type='text'],
+input[type='date'] {
     padding: 0.6rem;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -44,8 +44,8 @@ label {
     color: #333;
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
+button[type='submit'] {
+    background-color: #4caf50;
     color: white;
     padding: 0.7rem;
     border: none;

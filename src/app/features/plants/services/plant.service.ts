@@ -9,7 +9,7 @@ import { environment} from "../../../../environments/environment.development";
 export class PlantService extends BaseService<Plant> {
 
   override resourceEndpoint: string = environment.ENDPOINT_PATH_PLANTS;
-  override serverBaseUrl: string = "http://localhost:8080/api/v1";
+  override serverBaseUrl: string = "http://localhost:3000/api/v1";
 
 
   constructor() {

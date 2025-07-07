@@ -1,0 +1,9 @@
+<div class="plant-card">
+    <img [src]="plant.imageUrl" alt="{{ plant.name }}" />
+    <div class="plant-info">
+        <h3>{{ plant.name }}</h3>
+        <p>Humedad: {{ plant.humidity }}</p>
+        <p>Próximo riego: {{ plant.nextWateringDate }}</p>
+        <button [routerLink]="['/plants', plant.id]" class="ver-btn">Ver planta</button>
+    </div>
+</div>

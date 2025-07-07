@@ -1,16 +1,5 @@
 <div class="container">
-    <h2>Mis Plantas</h2>
-    <button routerLink="/plants/add" class="add-button">+ Agregar Planta</button>
-
-    <div class="grid">
-        <div class="plant-card" *ngFor="let plant of plants">
-            <img [src]="plant.imageUrl" alt="{{ plant.name }}" width="100px" height="100px" />
-            <div class="plant-info">
-                <h3>{{ plant.name }}</h3>
-                <p>Humedad: {{ plant.humidity }}</p>
-                <p>Próximo riego: {{ plant.nextWateringDate }}</p>
-                <button [routerLink]="['/plants', plant.id]" class="ver-btn">Ver planta</button>
-            </div>
-        </div>
-    </div>
+    <h2>{{ title }}</h2>
+    <button routerLink="/plants/add" class="add-button">{{ addButtonText }}</button>
+    <app-plant-card-list [plants]="plants"></app-plant-card-list>
 </div>

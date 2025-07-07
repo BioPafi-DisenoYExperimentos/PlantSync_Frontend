@@ -1,20 +1,34 @@
 <div class="layout">
     <aside class="sidebar">
         <div class="logo">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s406/logo.jpg" alt="PlantSync" />
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAd--IPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s406/logo.jpg" alt="PlantSync" />
         </div>
 
         <nav>
-            <a routerLink="/plants" routerLinkActive="active">Mis Plantas</a>
-            <a routerLink="/guides" routerLinkActive="active">Guías</a>
-            <a routerLink="/tasks" routerLinkActive="active">Tareas</a>
-            <a routerLink="/chatbot" routerLinkActive="active">RootBot</a>
-            <a routerLink="/configuration" routerLinkActive="active">Configuración</a>
+            <a routerLink="/plants" routerLinkActive="active">{{ labels[lang].plants }}</a>
+            <a routerLink="/guides" routerLinkActive="active">{{ labels[lang].guides }}</a>
+            <a routerLink="/tasks" routerLinkActive="active">{{ labels[lang].tasks }}</a>
+            <a routerLink="/chatbot" routerLinkActive="active">{{ labels[lang].chatbot }}</a>
+            <a routerLink="/configuration" routerLinkActive="active">{{ labels[lang].config }}</a>
         </nav>
 
         <div class="logout">
-            <a (click)="logout()" style="cursor: pointer;">Cerrar Sesión</a>
+            <a (click)="logout()" style="cursor: pointer;">{{ labels[lang].logout }}</a>
         </div>
+
+        <!-- Ahora el toggle va fuera de logout -->
+        <div class="language-toggle">
+            <label class="flag-toggle-switch">
+                <input type="checkbox" [checked]="lang === 'en'" (change)="toggleLang()" />
+                <span class="flag-slider">
+                  <span class="flag-label left">ES</span>
+                  <span class="flag-label right">EN</span>
+                  <span class="flag-thumb" [class.en]="lang === 'en'" [class.es]="lang === 'es'"></span>
+                </span>
+            </label>
+        </div>
+
+
     </aside>
 
     <main class="main-content">

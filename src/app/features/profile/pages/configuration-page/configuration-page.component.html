@@ -1,9 +1,9 @@
 <div class="config-page-container">
-    <h1>Configuración de perfil</h1>
+    <h1>{{ title }}</h1>
 
     <!-- Botón de modo oscuro -->
     <button (click)="toggleDarkMode()" class="dark-mode-toggle">
-        Cambiar a modo oscuro
+        {{ darkModeLabel }}
     </button>
 
     <app-configuration-form></app-configuration-form>
