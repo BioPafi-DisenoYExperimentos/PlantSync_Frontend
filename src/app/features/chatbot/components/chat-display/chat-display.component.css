@@ -1,7 +1,7 @@
 .chat-display {
     flex: 1;
-    padding: 1rem;
     overflow-y: auto;
+    padding: 1rem;
     background-color: #e5ddd5;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,7 @@
     line-height: 1.4;
     background-color: #dcf8c6;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
 }
 
 .assistant .bubble {
