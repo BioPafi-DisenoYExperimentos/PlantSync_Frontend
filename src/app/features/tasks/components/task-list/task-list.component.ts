@@ -95,7 +95,17 @@ export class TaskListComponent implements OnInit {
 
   // Removes a task by ID from both today's and upcoming tasks
   deleteTask(id: number): void {
-    this.todayTasks = this.todayTasks.filter(task => task.id !== id);
-    this.upcomingTasks = this.upcomingTasks.filter(task => task.id !== id);
+    this.taskService.delete(id).subscribe({
+      next: () => {
+        this.todayTasks = this.todayTasks.filter(task => task.id !== id);
+        this.upcomingTasks = this.upcomingTasks.filter(task => task.id !== id);
+        this.refreshTasks();
+      },
+      error: (err) => {
+        console.error('Error al eliminar la tarea:', err);
+      }
+    });
   }
+
+
 }
