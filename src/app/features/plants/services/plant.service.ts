@@ -9,7 +9,7 @@ import { environment} from "../../../../environments/environment.development";
 export class PlantService extends BaseService<Plant> {
 
   override resourceEndpoint: string = environment.ENDPOINT_PATH_PLANTS;
-  override serverBaseUrl: string = "http://localhost:8080/api/v1";
+
 
 
   constructor() {
@@ -36,10 +36,12 @@ export class PlantService extends BaseService<Plant> {
   }
 
 
-
   getPlantsByProfileId(profileId: number | string) {
-    return this.getByQuery('profileId', profileId);
+    return this.http.get<Plant[]>(
+        `${this.serverBaseUrl}${this.resourceEndpoint}/by-profile/${profileId}`
+    );
   }
+
 
 
 }

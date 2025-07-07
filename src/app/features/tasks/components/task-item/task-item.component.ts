@@ -10,7 +10,7 @@ import { TaskConfirmationDialogComponent } from "../task-confirmation-dialog/tas
   selector: 'app-task-item',
   imports: [
     MatCard,
-    NgOptimizedImage,
+
     MatCardTitle,
     MatCardSubtitle,
     MatCardContent

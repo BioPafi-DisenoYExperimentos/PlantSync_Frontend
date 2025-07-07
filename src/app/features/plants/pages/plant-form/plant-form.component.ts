@@ -30,7 +30,7 @@ export class PlantFormComponent implements OnInit {
       name: ['', Validators.required],
       species: ['', Validators.required],
       acquisitionDate: ['', Validators.required],
-      humidity: ['Normal'],
+      humidity: ['MEDIA'],
       nextWateringDate: [''],
       imageUrl: [''],
       notificationsEnabled: [false]
@@ -44,6 +44,7 @@ export class PlantFormComponent implements OnInit {
         this.plantForm.patchValue(plant);
       });
     }
+    console.log('Form creado:', this.plantForm.value);
   }
 
   onFileSelected(event: Event): void {
@@ -63,6 +64,7 @@ export class PlantFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('Formulario enviado');
     const formData = this.plantForm.value;
 
     if (this.isEditMode) {

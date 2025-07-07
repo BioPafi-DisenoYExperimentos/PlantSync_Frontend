@@ -26,4 +26,9 @@ export class ProfileService extends BaseService<Profile> {
     }
 
 
+    getByUserId(userId: number) {
+        return this.getByQuery('by-user-id', `userId=${userId}`);
+    }
+
+
 }

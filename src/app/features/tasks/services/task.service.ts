@@ -12,7 +12,7 @@ import { environment} from "../../../../environments/environment.development";
 export class TaskService extends BaseService<Task> {
 
     override resourceEndpoint = environment.ENDPOINT_PATH_TASKS;
-    override serverBaseUrl: string = "http://localhost:8080/api/v1";
+
 
 
     constructor() {

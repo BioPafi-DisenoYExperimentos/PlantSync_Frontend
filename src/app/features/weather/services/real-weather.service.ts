@@ -8,22 +8,19 @@ import { WeatherStatus } from '../model/weather-status.model';
 })
 export class RealWeatherService {
     private apiKey = 'f2aae48671e29e04c682372baceebe65';
-    private baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
+    private baseUrl = 'http://localhost:8080/api/v1/weather/city'; // o tu URL en Azure
 
     constructor(private http: HttpClient) {}
 
     getWeatherByCity(city: string): Observable<WeatherStatus> {
-        const url = `${this.baseUrl}?q=${city}&appid=${this.apiKey}&units=metric`;
+        const url = `${this.baseUrl}?city=${city}`;
         return this.http.get<any>(url).pipe(
-            map(data => {
-                const weather: WeatherStatus = {
-                    id: 0,
-                    location: data.name,
-                    temperature: data.main.temp,
-                    humidity: data.main.humidity
-                };
-                return weather;
-            })
+            map(data => ({
+                id: 0,
+                location: data.name,
+                temperature: data.main.temp,
+                humidity: data.main.humidity
+            }))
         );
     }
 }

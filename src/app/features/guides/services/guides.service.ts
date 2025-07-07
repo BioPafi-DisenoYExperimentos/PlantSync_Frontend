@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class GuidesService extends BaseService<Guide> {
 
-    override serverBaseUrl: string = "http://localhost:8080/api/v1";
+
     override resourceEndpoint: string = environment.ENDPOINT_PATH_GUIDES;
 
     constructor() {

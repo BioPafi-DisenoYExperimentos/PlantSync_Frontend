@@ -25,7 +25,7 @@ export class UserService  extends  BaseService<User>{
   }
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/sign-up`, user); // <-- usa /sign-up
+    return this.http.post<User>(`${this.apiUrl}/sign-up`, user);
   }
 
   signIn(credentials: { email: string, password: string }): Observable<User> {
