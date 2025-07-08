@@ -30,7 +30,7 @@ export class PlantFormComponent implements OnInit {
             name: ['', Validators.required],
             species: ['', Validators.required],
             acquisitionDate: ['', Validators.required],
-            humidity: ['Normal'],
+            humidity: ['MEDIA'],
             nextWateringDate: [''],
             imageUrl: [''],
             notificationsEnabled: [false]

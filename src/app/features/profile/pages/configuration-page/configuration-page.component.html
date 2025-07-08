@@ -1,10 +1,20 @@
 <div class="config-page-container">
     <h1>{{ title }}</h1>
 
-    <!-- Botón de modo oscuro -->
+
     <button (click)="toggleDarkMode()" class="dark-mode-toggle">
         {{ darkModeLabel }}
     </button>
 
     <app-configuration-form></app-configuration-form>
+
+
+    <section class="contact-section">
+        <h2>{{ contactTitle }}</h2>
+        <p>{{ contactDescription }}</p>
+        <ul>
+            <li><strong>Email:</strong> soportebiopafi.com</li>
+            <li><strong>Teléfono:</strong> +51 987 654 321</li>
+        </ul>
+    </section>
 </div>

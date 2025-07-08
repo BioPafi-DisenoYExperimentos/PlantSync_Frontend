@@ -29,6 +29,15 @@
                     </label>
                 </div>
             </div>
+            <div class="payment-form">
+                <h3>Datos de pago</h3>
+                <input type="text" placeholder="Nombre en la tarjeta" name="cardName" [(ngModel)]="cardName">
+                <input type="text" placeholder="Número de tarjeta" name="cardNumber" [(ngModel)]="cardNumber" maxlength="19">
+                <div class="card-details">
+                    <input type="text" placeholder="MM/AA" name="expiryDate" [(ngModel)]="expiryDate" maxlength="5">
+                    <input type="text" placeholder="CVV" name="cvv" [(ngModel)]="cvv" maxlength="4">
+                </div>
+            </div>
 
             <button type="submit">Registrarse</button>
 
