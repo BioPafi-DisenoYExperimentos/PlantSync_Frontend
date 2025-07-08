@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProfileService } from '../../services/profile.service';
 import { UserService} from "../../../auth/services/user.service";
-import { Profile } from '../../model/profile.entity';
+import { Profile} from "../../model/profile.entity";
 import { User} from "../../../auth/model/user.entity";
-import { MatFormField, MatInput, MatLabel} from "@angular/material/input";
-import {MatOption, MatSelect} from "@angular/material/select";
-import {MatButton} from "@angular/material/button";
 
+import { MatButtonModule } from '@angular/material/button';
+import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
 
 @Component({
   selector: 'app-configuration-form',
   templateUrl: './profile-configuration-form.component.html',
+  standalone: true,
   imports: [
-    MatFormField,
-    MatSelect,
-    MatOption,
-    MatInput,
-    ReactiveFormsModule,
-    MatButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
     MatLabel,
-
+    ReactiveFormsModule
   ],
   styleUrls: ['./profile-configuration-form.component.css']
 })
@@ -37,11 +39,17 @@ export class ConfigurationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    this.currentUserId = currentUser.id;
+    const storedUser = localStorage.getItem('currentUser');
+    if (!storedUser) {
+      console.error('No user found in localStorage');
+      return;
+    }
+
+    this.currentUser = JSON.parse(storedUser);
+    this.currentUserId = this.currentUser.id;
 
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      personName: ['', Validators.required],
       subscriptionPlan: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -50,45 +58,67 @@ export class ConfigurationFormComponent implements OnInit {
   }
 
   loadData(): void {
+    this.profileService.getById(this.currentUserId).subscribe({
+      next: (profile: Profile) => {
+        this.profileId = profile.id;
+        localStorage.setItem('currentProfile', JSON.stringify(profile));
 
-    this.profileService.getById(this.currentUserId).subscribe((profile: Profile) => {
-      this.profileId = profile.id;
-
-      localStorage.setItem('currentProfile', JSON.stringify(profile));
-
-      this.form.patchValue({
-        name: profile.name,
-        subscriptionPlan: profile.subscriptionPlan
-      });
+        this.form.patchValue({
+          personName: profile.personName,
+          subscriptionPlan: profile.subscriptionPlan?.toUpperCase()
+        });
+      },
+      error: (err) => {
+        console.error('Error loading profile:', err);
+      }
     });
+    console.log(this.form.value);
 
-    this.userService.getById(this.currentUserId).subscribe((user: User) => {
-      this.form.patchValue({ email: user.email });
+    this.userService.getById(this.currentUserId).subscribe({
+      next: (user: User) => {
+        this.form.patchValue({ email: user.email });
+      },
+      error: (err) => {
+        console.error('Error loading user:', err);
+      }
     });
   }
 
   onSubmit(): void {
     if (this.form.invalid) return;
 
-    const { name, subscriptionPlan, email } = this.form.value;
+    const { personName, subscriptionPlan, email } = this.form.value;
 
     const updatedProfile = new Profile({
       id: this.profileId,
       userId: this.currentUserId,
-      name,
+      personName,
+      subscriptionPlan
+    });
+    console.log({
+      id: this.profileId,
+      userId: this.currentUserId,
+      personName,
       subscriptionPlan
     });
 
-    this.profileService.update(this.profileId, updatedProfile).subscribe(() => {
-      console.log('Perfil actualizado');
+
+    console.log('Enviando perfil al backend:', updatedProfile);
+
+    this.profileService.update(this.profileId, updatedProfile).subscribe({
+      next: () => console.log('Perfil actualizado correctamente'),
+      error: (err) => console.error('Error actualizando perfil:', err)
     });
 
-    const updatedUser = { ...this.currentUser, email };
+    const updatedUser: User = {
+      id: this.currentUser.id,
+      email,
+      password: this.currentUser.password
+    };
 
-    this.userService.updateUser(this.currentUser.id, updatedUser).subscribe(() => {
-      console.log('Correo actualizado');
+    this.userService.updateUser(this.currentUser.id, updatedUser).subscribe({
+      next: () => console.log('Correo actualizado correctamente'),
+      error: (err) => console.error('Error actualizando correo:', err)
     });
   }
-
-
 }

@@ -11,7 +11,7 @@ import {PlantService} from "./plant.service";
 })
 export class PlantHistoryService extends BaseService<PlantHistory>{
 
-  override serverBaseUrl: string = "http://localhost:8080/api/v1";
+
 
   private apiUrl = `${this.serverBaseUrl}/plantHistory`;
 

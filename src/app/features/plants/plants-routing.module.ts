@@ -9,7 +9,7 @@ export const plantsRoutes: Routes = [
   {
     path: 'add',
     loadComponent: () =>
-        import('./pages/plant-form/plant-form.page').then(m => m.PlantFormPage)
+        import('./components/plant-form/plant-form.component').then(m => m.PlantFormComponent)
   },
   {
     path: ':id',
@@ -19,7 +19,7 @@ export const plantsRoutes: Routes = [
   {
     path: ':id/edit',
     loadComponent: () =>
-        import('./pages/plant-form/plant-form.page').then(m => m.PlantFormPage)
+        import('./components/plant-form/plant-form.component').then(m => m.PlantFormComponent)
   },
   {
     path: ':id/history',

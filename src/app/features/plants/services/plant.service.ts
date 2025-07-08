@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Plant } from '../model/plant';
 import { BaseService} from "../../../shared/services/base.service";
 import { environment} from "../../../../environments/environment.development";
+import {catchError, Observable, retry} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ import { environment} from "../../../../environments/environment.development";
 export class PlantService extends BaseService<Plant> {
 
   override resourceEndpoint: string = environment.ENDPOINT_PATH_PLANTS;
-  override serverBaseUrl: string = "http://localhost:3000/api/v1";
+
+
+
 
 
   constructor() {
@@ -37,9 +40,12 @@ export class PlantService extends BaseService<Plant> {
 
 
 
-  getPlantsByProfileId(profileId: number | string) {
-    return this.getByQuery('profileId', profileId);
+  getPlantsByProfileId(profileId: number | string): Observable<Plant[]> {
+    return this.http.get<Plant[]>(`${this.resourcePath()}/by-profile/${profileId}`, this.httpOptions)
+        .pipe(retry(2), catchError(this.handleError));
   }
+
+
 
 
 }

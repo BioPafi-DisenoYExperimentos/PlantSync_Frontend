@@ -35,12 +35,12 @@ export class MisPlantasComponent implements OnInit, OnDestroy {
       this.plants = plants;
     });
 
-    // Inicializa texto según el idioma actual
+
     this.title = this.languageService.getLabel('plants', 'title');
     this.addButtonText = this.languageService.getLabel('plants', 'addPlant');
 
 
-    // Reactualiza en cambios de idioma
+
     this.langSub = this.languageService.lang$.subscribe(() => {
       this.title = this.languageService.getLabel('plants', 'title');
       this.addButtonText = this.languageService.getLabel('plants', 'addPlant');

@@ -36,5 +36,11 @@ export class UserService  extends  BaseService<User>{
   updateUser(id: number, user: User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${id}`, user);
   }
+  createStripeSession(userId: number, plan: string) {
+    return this.http.post<{ url: string }>(
+        'http://localhost:8080/api/payments/create-session',
+        { userId, subscriptionPlan: plan }
+    );
+  }
 
 }

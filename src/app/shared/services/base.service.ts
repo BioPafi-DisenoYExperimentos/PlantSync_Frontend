@@ -28,6 +28,10 @@ export abstract class BaseService<T> {
     } else {
       console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
     }
+    if (error.status === 200) {
+
+    }
+
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
@@ -56,7 +60,7 @@ export abstract class BaseService<T> {
    */
   public delete(id: any): Observable<any> {
     return this.http.delete(`${this.resourcePath()}/${id}`, this.httpOptions)
-        .pipe(retry(2), catchError(this.handleError));
+        .pipe( catchError(this.handleError));
   }
 
   /**
