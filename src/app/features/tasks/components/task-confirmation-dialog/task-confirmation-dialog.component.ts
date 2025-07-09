@@ -1,40 +1,52 @@
 // Import core Angular functionality and required Material Dialog modules
 import { Component, Inject } from '@angular/core';
 import {
-  MAT_DIALOG_DATA,           // Token to inject the data passed to the dialog
-  MatDialogActions,          // Component for dialog action buttons
-  MatDialogContent,          // Component for dialog content section
-  MatDialogRef,              // Reference to the currently opened dialog
-  MatDialogTitle             // Component for the dialog title section
+  MAT_DIALOG_DATA,         // Token to inject the data passed to the dialog
+  MatDialogActions,        // Material component for dialog actions section
+  MatDialogContent,        // Material component for dialog content
+  MatDialogRef,            // Reference to the dialog instance
+  MatDialogTitle           // Material component for dialog title
 } from '@angular/material/dialog';
 import { MatButton } from "@angular/material/button"; // Material button module
 
-// Component metadata
+/**
+ * TaskConfirmationDialogComponent is a reusable confirmation dialog
+ * used to confirm the deletion of a task.
+ */
 @Component({
-  selector: 'app-task-confirmation-dialog', // Component selector
-  templateUrl: './task-confirmation-dialog.component.html', // HTML template path
+  selector: 'app-task-confirmation-dialog',
+  templateUrl: './task-confirmation-dialog.component.html',
+  styleUrls: ['./task-confirmation-dialog.component.css'],
+  standalone: true,
   imports: [
-    MatDialogTitle,      // Import Material dialog title
-    MatDialogContent,    // Import Material dialog content
-    MatDialogActions,    // Import Material dialog actions
-    MatButton            // Import Material buttons
-  ],
-  styleUrls: ['./task-confirmation-dialog.component.css'] // CSS styles
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton
+  ]
 })
 export class TaskConfirmationDialogComponent {
 
-  // Constructor receives a reference to the dialog and the data injected
+  /**
+   * Initializes the confirmation dialog.
+   * @param dialogRef - Reference to the open dialog instance
+   * @param data - Data passed into the dialog (e.g., task to be confirmed)
+   */
   constructor(
-      public dialogRef: MatDialogRef<TaskConfirmationDialogComponent>, // Dialog reference
-      @Inject(MAT_DIALOG_DATA) public data: any                         // Injected dialog data
+      public dialogRef: MatDialogRef<TaskConfirmationDialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  // Method called when the user clicks "Cancel" – closes the dialog and returns false
+  /**
+   * Closes the dialog and returns `false` to indicate cancellation.
+   */
   onCancel(): void {
     this.dialogRef.close(false);
   }
 
-  // Method called when the user confirms – closes the dialog and returns true
+  /**
+   * Closes the dialog and returns `true` to indicate confirmation.
+   */
   onConfirm(): void {
     this.dialogRef.close(true);
   }

@@ -4,14 +4,25 @@ import { WeatherStatus } from '../model/weather-status.model';
 import { WeatherTip } from '../model/weather-tip.model';
 import { RealWeatherService } from './real-weather.service';
 
+/**
+ * WeatherService integrates real-time weather data with predefined tips based on humidity.
+ * It delegates weather retrieval to RealWeatherService and provides relevant plant care advice.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
+
   constructor(private realWeatherService: RealWeatherService) {}
 
+  /**
+   * Retrieves weather information for a predefined city and provides tips based on humidity level.
+   * @returns An observable that emits an object containing:
+   *  - `weather`: a `WeatherStatus` instance with temperature and humidity.
+   *  - `tips`: an array of `WeatherTip` objects with humidity ranges and corresponding recommendations.
+   */
   getWeatherAndTip(): Observable<{ weather: WeatherStatus; tips: WeatherTip[] }> {
-    const city = 'Lima';
+    const city = 'Lima';  // Default city; this could be dynamic in future versions
 
     const weather$ = this.realWeatherService.getWeatherByCity(city);
 

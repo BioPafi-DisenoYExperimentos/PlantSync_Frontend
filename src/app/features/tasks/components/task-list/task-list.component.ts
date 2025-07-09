@@ -1,40 +1,58 @@
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskService } from "../../services/task.service";
-import {Task, TaskViewModel} from "../../model/task.entity";
+import { Task, TaskViewModel } from "../../model/task.entity";
 import { TaskConfirmationDialogComponent } from "../task-confirmation-dialog/task-confirmation-dialog.component";
 import { TaskItemComponent } from "../task-item/task-item.component";
 import { NgForOf } from "@angular/common";
-import {PlantService} from "../../../plants/services/plant.service";
-import {forkJoin} from "rxjs";
+import { PlantService } from "../../../plants/services/plant.service";
+import { forkJoin } from "rxjs";
 
-
+/**
+ * TaskListComponent displays a list of tasks categorized as "today" and "upcoming".
+ * It fetches tasks and plant data, formats it for view, and provides delete confirmation.
+ */
 @Component({
-  selector: 'app-task-list', // Component selector used in HTML
-  templateUrl: './task-list.component.html', // HTML template file
+  selector: 'app-task-list',
+  templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.css'],
+  standalone: true,
   imports: [
-    TaskItemComponent, // Import the custom task item component
-    NgForOf,
-
-    // Required for *ngFor directive
-  ],
-  styleUrls: ['./task-list.component.css'] // CSS style for the component
+    TaskItemComponent,
+    NgForOf
+  ]
 })
 export class TaskListComponent implements OnInit {
+  /** Tasks scheduled for today */
   todayTasks: TaskViewModel[] = [];
+
+  /** Tasks scheduled for future dates */
   upcomingTasks: TaskViewModel[] = [];
 
+  /**
+   * Injects services for handling task/plant data and dialogs.
+   * @param taskService - Handles CRUD operations for tasks
+   * @param dialog - Angular Material Dialog service
+   * @param plantService - Provides access to plant data
+   */
   constructor(
       private taskService: TaskService,
       public dialog: MatDialog,
       private plantService: PlantService
   ) {}
 
+  /**
+   * Lifecycle hook called on component initialization.
+   * Loads tasks and prepares them for display.
+   */
   ngOnInit(): void {
     this.refreshTasks();
   }
 
+  /**
+   * Fetches tasks and plants, filters them by current user,
+   * and categorizes them as "today" or "upcoming".
+   */
   public refreshTasks(): void {
     const currentProfile = JSON.parse(localStorage.getItem('currentProfile') || '{}');
     const currentProfileId = currentProfile.id;
@@ -79,6 +97,10 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a confirmation dialog to delete a task.
+   * @param task - The task to confirm deletion for
+   */
   openDialog(task: Task): void {
     const dialogRef = this.dialog.open(TaskConfirmationDialogComponent, {
       width: '250px',
@@ -92,8 +114,10 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-
-  // Removes a task by ID from both today's and upcoming tasks
+  /**
+   * Deletes a task and updates the local task lists.
+   * @param id - ID of the task to delete
+   */
   deleteTask(id: number): void {
     this.taskService.delete(id).subscribe({
       next: () => {
@@ -102,10 +126,8 @@ export class TaskListComponent implements OnInit {
         this.refreshTasks();
       },
       error: (err) => {
-        console.error('Error al eliminar la tarea:', err);
+        console.error('Error deleting task:', err);
       }
     });
   }
-
-
 }

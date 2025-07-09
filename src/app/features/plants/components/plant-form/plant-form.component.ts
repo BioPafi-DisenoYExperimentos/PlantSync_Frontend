@@ -6,6 +6,10 @@ import { PlantService } from '../../services/plant.service';
 import { Plant } from '../../model/plant';
 import { Profile } from '../../../profile/model/profile.entity';
 
+/**
+ * PlantFormComponent is responsible for creating and editing plant records.
+ * It uses Reactive Forms and determines the mode (create or edit) based on the route parameter.
+ */
 @Component({
     selector: 'app-plant-form',
     standalone: true,
@@ -14,10 +18,22 @@ import { Profile } from '../../../profile/model/profile.entity';
     styleUrls: ['./plant-form.component.css']
 })
 export class PlantFormComponent implements OnInit {
+    /** Reactive form group for plant data */
     plantForm!: FormGroup;
+
+    /** Flag to determine whether the form is in edit mode */
     isEditMode = false;
+
+    /** Stores the plant ID when editing */
     plantId!: number;
 
+    /**
+     * Injects services required for form building, routing, and data operations.
+     * @param fb - FormBuilder to initialize the reactive form
+     * @param route - ActivatedRoute to access route parameters
+     * @param router - Router to navigate after submission
+     * @param plantService - Service to perform CRUD operations on plants
+     */
     constructor(
         private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -25,6 +41,9 @@ export class PlantFormComponent implements OnInit {
         private plantService: PlantService
     ) {}
 
+    /**
+     * Initializes the form with controls and sets up edit mode if an ID is present in the route.
+     */
     ngOnInit(): void {
         this.plantForm = this.fb.group({
             name: ['', Validators.required],
@@ -46,6 +65,10 @@ export class PlantFormComponent implements OnInit {
         }
     }
 
+    /**
+     * Handles file input for the plant image and converts it to a base64 string.
+     * @param event - File input change event
+     */
     onFileSelected(event: Event): void {
         const input = event.target as HTMLInputElement;
         if (!input.files || input.files.length === 0) return;
@@ -61,6 +84,10 @@ export class PlantFormComponent implements OnInit {
         reader.readAsDataURL(file);
     }
 
+    /**
+     * Handles form submission for both create and edit modes.
+     * Adds or updates a plant record and navigates back to the plant list.
+     */
     onSubmit(): void {
         const formData = this.plantForm.value;
         const currentProfileJson = localStorage.getItem('currentProfile');
@@ -90,6 +117,10 @@ export class PlantFormComponent implements OnInit {
         }
     }
 
+    /**
+     * Generates a default next watering date, 5 days from today.
+     * @returns A string with the date in YYYY-MM-DD format
+     */
     generateNextWateringDate(): string {
         const today = new Date();
         today.setDate(today.getDate() + 5);
