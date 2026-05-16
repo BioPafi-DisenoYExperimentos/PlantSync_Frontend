@@ -1,17 +1,33 @@
-<div class="login-container">
-    <div class="login-form">
-        <h2>Iniciar Sesión</h2>
-        <form (ngSubmit)="login()">
-            <input type="email" [(ngModel)]="email" name="email" placeholder="Correo" required>
-            <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar</button>
-        </form>
-        <p>¿No tienes una cuenta? <a routerLink="/register">Register</a></p>
-    </div>
+<div class="auth-wrapper">
+    <div class="auth-container card-shadow">
+        <div class="auth-form-section">
+            <div class="brand-header">
+                <h2>Bienvenido de vuelta</h2>
+                <p>Ingresa tus datos para continuar en PlantSync</p>
+            </div>
 
-    <div class="login-info">
-        <h2>Tu Planta Siempre <br> Bien Cuidada, <br> Sin Complicaciones</h2>
-        <p>Monitorea su estado, recibe notificaciones y accede a guías sin ser un experto</p>
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s320/logo.jpg" alt="planta">
+            <form (ngSubmit)="login()">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" [(ngModel)]="email" name="email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" [(ngModel)]="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-primary" style="margin-top: 1rem;">Iniciar Sesión</button>
+            </form>
+
+            <p class="auth-footer">¿No tienes una cuenta? <a routerLink="/register">Regístrate aquí</a></p>
+        </div>
+
+        <div class="auth-info-section gradient-organic">
+            <div class="info-content">
+                <h2>Tu Planta Siempre<br>Bien Cuidada,<br>Sin Complicaciones</h2>
+                <p>Monitorea su estado, recibe notificaciones y accede a guías sin ser un experto.</p>
+                <img class="animate-float" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s320/logo.jpg" alt="PlantSync Logo" style="border-radius: var(--radius); mix-blend-mode: multiply;">
+            </div>
+        </div>
     </div>
 </div>

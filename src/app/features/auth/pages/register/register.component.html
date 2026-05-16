@@ -1,54 +1,81 @@
-<div class="register-container">
-    <div class="register-form">
-        <h2>Registrarse</h2>
-        <form (ngSubmit)="register()">
-            <input type="text" [(ngModel)]="name" name="name" placeholder="Nombres" required>
-            <input type="email" [(ngModel)]="email" name="email" placeholder="Correo" required>
-            <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
-
-            <div class="plan-selection">
-                <h3>Elige tu plan:</h3>
-                <div class="plan-options">
-                    <label class="plan-card" [class.selected]="selectedPlan === 'basic'">
-                        <input type="radio" name="plan" [(ngModel)]="selectedPlan" value="basic" required>
-                        <h4>Básico</h4>
-                        <p>$2.99/mes</p>
-                    </label>
-
-                    <label class="plan-card" [class.selected]="selectedPlan === 'premium'">
-                        <input type="radio" name="plan" [(ngModel)]="selectedPlan" value="premium">
-                        <h4>Premium</h4>
-                        <p>$10.99/mes</p>
-
-                    </label>
-
-                    <label class="plan-card" [class.selected]="selectedPlan === 'pro'">
-                        <input type="radio" name="plan" [(ngModel)]="selectedPlan" value="pro">
-                        <h4>Pro</h4>
-                        <p>$16.99/mes</p>
-                    </label>
-                </div>
-            </div>
-            <div class="payment-form">
-                <h3>Datos de pago</h3>
-                <input type="text" placeholder="Nombre en la tarjeta" name="cardName" [(ngModel)]="cardName">
-                <input type="text" placeholder="Número de tarjeta" name="cardNumber" [(ngModel)]="cardNumber" maxlength="19">
-                <div class="card-details">
-                    <input type="text" placeholder="MM/AA" name="expiryDate" [(ngModel)]="expiryDate" maxlength="5">
-                    <input type="text" placeholder="CVV" name="cvv" [(ngModel)]="cvv" maxlength="4">
-                </div>
+<div class="auth-wrapper">
+    <div class="auth-container card-shadow" style="max-width: 1100px;">
+        <div class="auth-form-section" style="padding: 2rem 3rem;">
+            <div class="brand-header" style="margin-bottom: 1.5rem;">
+                <h2>Crear Cuenta</h2>
+                <p>Únete a PlantSync y haz que tus plantas prosperen.</p>
             </div>
 
-            <button type="submit">Registrarse</button>
+            <form (ngSubmit)="register()">
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label>Nombres</label>
+                        <input type="text" [(ngModel)]="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo</label>
+                        <input type="email" [(ngModel)]="email" name="email" placeholder="correo@ejemplo.com" required>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" [(ngModel)]="password" name="password" placeholder="••••••••" required>
+                </div>
 
-        </form>
-        <p>¿Tienes una cuenta? <a routerLink="/login">Login</a></p>
-    </div>
+                <div class="plan-selection">
+                    <label>Elige tu plan:</label>
+                    <div class="plan-options">
+                        <label class="plan-card" [class.selected]="selectedPlan === 'basic'">
+                            <input type="radio" name="plan" [(ngModel)]="selectedPlan" value="basic" required>
+                            <div class="plan-content">
+                                <h4>Básico</h4>
+                                <p class="price">$2.99<span>/mes</span></p>
+                            </div>
+                        </label>
 
-    <div class="register-info">
-        <h2>Tu Planta Siempre <br> Bien Cuidada, <br> Sin Complicaciones</h2>
-        <p>Monitorea su estado, recibe notificaciones y accede a guías sin ser un experto</p>
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s320/logo.jpg" alt="planta">
+                        <label class="plan-card" [class.selected]="selectedPlan === 'premium'">
+                            <input type="radio" name="plan" [(ngModel)]="selectedPlan" value="premium">
+                            <div class="plan-content">
+                                <h4>Premium</h4>
+                                <p class="price">$10.99<span>/mes</span></p>
+                            </div>
+                        </label>
+
+                        <label class="plan-card" [class.selected]="selectedPlan === 'pro'">
+                            <input type="radio" name="plan" [(ngModel)]="selectedPlan" value="pro">
+                            <div class="plan-content">
+                                <h4>Pro</h4>
+                                <p class="price">$16.99<span>/mes</span></p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                @if (selectedPlan !== 'basic') {
+                    <div class="payment-section">
+                        <label>Datos de pago</label>
+                        <input type="text" placeholder="Nombre en la tarjeta" name="cardName" [(ngModel)]="cardName" style="margin-bottom: 0.75rem;">
+                        <input type="text" placeholder="Número de tarjeta" name="cardNumber" [(ngModel)]="cardNumber" maxlength="19" style="margin-bottom: 0.75rem;">
+                        <div class="form-group-row">
+                            <input type="text" placeholder="MM/AA" name="expiryDate" [(ngModel)]="expiryDate" maxlength="5">
+                            <input type="text" placeholder="CVV" name="cvv" [(ngModel)]="cvv" maxlength="4">
+                        </div>
+                    </div>
+                }
+
+                <button type="submit" class="btn-primary" style="margin-top: 1.5rem;">Registrarse</button>
+            </form>
+
+            <p class="auth-footer">¿Ya tienes una cuenta? <a routerLink="/login">Inicia Sesión</a></p>
+        </div>
+
+        <div class="auth-info-section gradient-organic">
+            <div class="info-content">
+                <h2>Crecimiento<br>Inteligente</h2>
+                <p>La tecnología de BioDemeter en la palma de tu mano.</p>
+                <img class="animate-float" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s320/logo.jpg" alt="PlantSync Logo" style="border-radius: var(--radius); mix-blend-mode: multiply;">
+            </div>
+        </div>
     </div>
 </div>

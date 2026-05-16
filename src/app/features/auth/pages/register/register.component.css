@@ -1,161 +1,88 @@
-body, :host {
-    background-color: #FFFFFF;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/* Copia todas las clases de login.component.css primero */
+.auth-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 2rem; background-color: var(--background); }
+.auth-container { display: flex; width: 100%; max-width: 1000px; background-color: var(--card); border-radius: 1.5rem; overflow: hidden; border: 1px solid var(--border); }
+.card-shadow { box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1); }
+.auth-form-section { flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+.brand-header h2 { font-family: 'Outfit', sans-serif; color: var(--primary); font-size: 2rem; margin: 0 0 0.5rem 0; }
+.brand-header p { color: var(--muted-foreground); margin: 0; }
+.form-group { margin-bottom: 1.25rem; display: flex; flex-direction: column; flex: 1;}
+.form-group label { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--foreground); }
+.form-group-row { display: flex; gap: 1rem; width: 100%; }
+.auth-footer { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--muted-foreground); }
+.auth-footer a { color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.2s ease; }
+.auth-info-section { flex: 1; padding: 3rem; display: flex; align-items: center; justify-content: center; text-align: center; border-left: 1px solid var(--border); }
+.info-content { max-width: 320px; }
+.info-content h2 { font-family: 'Outfit', sans-serif; font-size: 2.2rem; color: var(--primary); line-height: 1.2; margin-bottom: 1rem; }
+.info-content p { color: var(--foreground); opacity: 0.8; margin-bottom: 2.5rem; font-size: 1.1rem; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-.register-container {
-    display: flex;
-    width: 1000px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    background-color: white;
-}
-
-/* Sección izquierda: formulario */
-.register-form {
-    background-color: #f9f8f3;
-    padding: 2rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.register-form h2 {
-    margin-bottom: 1rem;
-    color: #2F5233;
-}
-
-.register-form input {
-    margin-bottom: 1rem;
-    padding: 0.6rem;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    width: 100%;
-    font-size: 1rem;
-}
-
-.register-form button {
-    background-color: #64BC66;
-    color: white;
-    border: none;
-    padding: 0.6rem;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
-}
-
-.register-form a {
-    font-size: 0.9rem;
-    color: #2F5233;
-    text-decoration: none;
-}
-
-/* Sección derecha */
-.register-info {
-    background-color: #64BC66;
-    color: white;
-    flex: 1;
-    padding: 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-.register-info h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-}
-
-.register-info p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-}
-
-.register-info img {
-    width: 200px;
-    height: auto;
-    margin: auto;
-}
-.plan-selection {
-    margin: 20px 0;
+/* Estilos específicos de Registro (Planes y Pago) */
+.plan-selection label {
+    font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--foreground); display: block;
 }
 
 .plan-options {
     display: flex;
-    gap: 15px;
-    margin-top: 10px;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .plan-card {
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    cursor: pointer;
     flex: 1;
-    transition: all 0.3s;
-}
-
-.plan-card.selected {
-    border-color: #4CAF50;
-    background-color: #f8f9fa;
-}
-
-.plan-card h4 {
-    margin-top: 0;
-    color: #2c3e50;
-}
-
-.plan-card p {
-    font-weight: bold;
-    color: #4CAF50;
-}
-
-.plan-card ul {
-    padding-left: 20px;
-    color: #666;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: var(--background);
+    text-align: center;
 }
 
 .plan-card input[type="radio"] {
-    display: none; /* Ocultamos el radio button nativo */
+    display: none;
 }
 
-.payment-form {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #ccc;
+.plan-card:hover {
+    border-color: var(--secondary);
 }
 
-.payment-form h3 {
-    margin-bottom: 1rem;
-    color: #2F5233;
+.plan-card.selected {
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
 }
 
-.payment-form input {
-    margin-bottom: 1rem;
-    padding: 0.6rem;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    width: 100%;
-    font-size: 1rem;
+.plan-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--foreground);
+    font-size: 1.1rem;
 }
 
-.card-details {
-    display: flex;
-    gap: 1rem;
+.plan-content .price {
+    margin: 0;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.25rem;
 }
-.card-details input {
-    flex: 1;
+
+.plan-content .price span {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--muted-foreground);
+}
+
+.payment-section {
+    background-color: var(--background);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+.payment-section label {
+    font-size: 0.875rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--foreground); display: block;
+}
+
+@media (max-width: 768px) {
+    .auth-container { flex-direction: column; }
+    .auth-info-section { display: none; }
+    .plan-options { flex-direction: column; }
 }

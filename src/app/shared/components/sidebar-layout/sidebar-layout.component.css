@@ -1,82 +1,96 @@
-.layout {
+.app-layout {
     display: flex;
     height: 100vh;
-    background-color: var(--bg-color);
-    transition: background-color 0.3s ease;
+    background-color: var(--background);
+    overflow: hidden;
 }
 
 .sidebar {
-    width: 250px;
+    width: 260px;
     background-color: var(--sidebar-bg);
-    border-right: 1px solid var(--border-color);
-    padding: 1.5rem;
+    border-right: 1px solid var(--sidebar-border);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    padding: 1.5rem;
+    z-index: 10;
 }
 
-.logo {
+.sidebar-header {
     display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2.5rem;
+    padding: 0 0.5rem;
 }
 
-.logo img {
-    max-width: 140px;
-    height: auto;
-    border-radius: 8px; /* Le da un toque más pulido a la imagen de la marca */
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
 }
 
-nav {
+.brand-name {
+    font-family: 'Outfit', sans-serif;
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    flex: 1;
 }
 
-nav a {
+.nav-item {
     display: block;
     color: var(--sidebar-text);
     text-decoration: none;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius);
     font-weight: 500;
     transition: all 0.2s ease;
+    font-size: 0.95rem;
 }
 
-nav a.active,
-nav a:hover {
+.nav-item.active {
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.nav-item:hover:not(.active) {
     background-color: var(--sidebar-hover);
     color: var(--sidebar-hover-text);
 }
 
-.logout {
+.sidebar-footer {
     margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sidebar-border);
 }
 
 .logout-btn {
-    display: block;
-    width: 100%;
-    color: var(--sidebar-text);
-    text-decoration: none;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    box-sizing: border-box;
+    color: var(--muted-foreground);
+    cursor: pointer;
 }
 
 .logout-btn:hover {
-    background-color: var(--sidebar-hover);
-    color: oklch(0.577 0.245 27.325); /* Tono terracota/destructive sutil para salir */
+    background-color: color-mix(in srgb, oklch(0.577 0.245 27.325) 10%, transparent); /* Red/Destructive tint */
+    color: oklch(0.577 0.245 27.325);
 }
 
-.main-content {
-    flex-grow: 1;
-    padding: 2rem;
-    background-color: var(--bg-color);
+.main-container {
+    flex: 1;
+    background-color: var(--background);
     overflow-y: auto;
-    transition: background-color 0.3s ease;
+}
+
+.main-content-inner {
+    padding: 2.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }

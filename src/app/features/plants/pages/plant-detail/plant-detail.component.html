@@ -1,39 +1,65 @@
-<div class="detail-container" *ngIf="plant">
-    <div class="header">
-        <span class="back-arrow" routerLink="/plants">←</span>
-        <h2>{{ plant.name }}</h2>
-        <p class="date">Fecha de Adquisición: {{ plant.acquisitionDate }}</p>
+<div class="detail-wrapper" *ngIf="plant">
+    <div class="detail-header">
+        <button class="back-btn" routerLink="/plants">
+            ← Volver a Mis Plantas
+        </button>
+        <div class="actions">
+            <button class="btn-edit" [routerLink]="['/plants', plant.id, 'edit']">Editar Planta</button>
+            <button class="btn-delete" (click)="onDelete()">Eliminar</button>
+        </div>
     </div>
 
-    <div class="main-layout">
-        <div class="image-section">
-            <img [src]="plant.imageUrl || 'https://via.placeholder.com/200x200'" alt="{{ plant.name }}" />
+    <div class="plant-content-grid">
+        <div class="plant-profile-card card-shadow">
+            <div class="image-container">
+                <img
+                        [src]="plant.imageUrl || 'https://images.unsplash.com/photo-1416879598555-2572fa82798e?auto=format&fit=crop&w=400&q=80'"
+                        [alt]="plant.name"
+                        onerror="this.src='https://images.unsplash.com/photo-1416879598555-2572fa82798e?auto=format&fit=crop&w=400&q=80'"
+                />
+                <div class="species-badge">{{ plant.species }}</div>
+            </div>
+            <div class="plant-info-main">
+                <h2>{{ plant.name }}</h2>
+                <div class="info-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Adquisición</span>
+                        <span class="stat-value">{{ plant.acquisitionDate }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Humedad Ideal</span>
+                        <span class="stat-value">{{ plant.humidity || 'MEDIA' }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="info-section">
-            <div class="actions">
-                <button class="edit" [routerLink]="['/plants', plant.id, 'edit']">Editar</button>
-                <button class="delete" (click)="onDelete()">Borrar</button>
-            </div>
-
-            <div class="description">
-                <h4>Descripción</h4>
-                <p>
-                    La {{ plant.name }} es una planta tropical de interior muy popular por su follaje espectacular.
-                    Tiene hojas grandes, verdes y brillantes, con cortes y perforaciones naturales que la hacen inconfundible.
+        <div class="plant-side-panel">
+            <div class="info-card card-shadow">
+                <h3>Cuidado y Estado</h3>
+                <p class="description">
+                    La <strong>{{ plant.name }}</strong> ({{ plant.species }}) es parte vital de tu jardín.
+                    Asegúrate de mantener su nivel de humedad adecuadamente para garantizar un follaje sano y espectacular.
                 </p>
+
+                <div class="task-alert" [class.active]="plant.nextWateringDate">
+                    <div class="task-icon">💧</div>
+                    <div class="task-text">
+                        <strong>Próximo Riego Programado</strong>
+                        <span>{{ plant.nextWateringDate || 'No hay riegos programados' }}</span>
+                    </div>
+                </div>
+
+                <div class="history-link-container">
+                    <a class="history-link" [routerLink]="['/plants', plant.id, 'history']">
+                        Ver Historial de la Planta →
+                    </a>
+                </div>
             </div>
 
-            <app-weather-card></app-weather-card>
+            <div class="weather-wrapper">
+                <app-weather-card></app-weather-card>
+            </div>
         </div>
-    </div>
-
-    <div class="tasks">
-        <h4>Tareas próximas:</h4>
-        <p>Riego: {{ plant.nextWateringDate }}</p>
-    </div>
-
-    <div class="footer">
-        <a [routerLink]="['/plants', plant.id, 'history']">View History</a>
     </div>
 </div>

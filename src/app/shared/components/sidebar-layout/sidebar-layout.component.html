@@ -1,23 +1,26 @@
-<div class="layout">
+<div class="app-layout">
     <aside class="sidebar">
-        <div class="logo">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s406/logo.jpg" alt="PlantSync" />
+        <div class="sidebar-header">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbACF_5_9ZIqxZTFLxTbYDll42F-h0keNMgr5vhWdU-kCDy1x5jaMjb-vOhAMZYkcMmgkOqefsGmeALW9qXiAdhyphenhyphenIPMT3z2JNypCS9ZEAC_O-j-W7gX7ysUMsPIQ1P9S9OFivpCeCqbY1vyv_479SoYYnbYI7gUfQSHW3IBpN6HTuO4dkrcH1KJ3HIBh0/s406/logo.jpg" alt="PlantSync" class="brand-logo" />
+            <h2 class="brand-name">PlantSync</h2>
         </div>
 
-        <nav>
-            <a routerLink="/plants" routerLinkActive="active">My Plants</a>
-            <a routerLink="/guides" routerLinkActive="active">Guides</a>
-            <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
-            <a routerLink="/chatbot" routerLinkActive="active">RootBot</a>
-            <a routerLink="/config" routerLinkActive="active">Settings</a>
+        <nav class="sidebar-nav">
+            <a routerLink="/plants" routerLinkActive="active" class="nav-item">Mis Plantas</a>
+            <a routerLink="/guides" routerLinkActive="active" class="nav-item">Guías</a>
+            <a routerLink="/tasks" routerLinkActive="active" class="nav-item">Tareas</a>
+            <a routerLink="/chatbot" routerLinkActive="active" class="nav-item">RootBot</a>
+            <a routerLink="/config" routerLinkActive="active" class="nav-item">Configuración</a>
         </nav>
 
-        <div class="logout">
-            <a class="logout-btn" (click)="logout()" style="cursor: pointer;">Log Out</a>
+        <div class="sidebar-footer">
+            <a class="nav-item logout-btn" (click)="logout()">Cerrar Sesión</a>
         </div>
     </aside>
 
-    <main class="main-content">
-        <router-outlet></router-outlet>
+    <main class="main-container">
+        <div class="main-content-inner">
+            <router-outlet></router-outlet>
+        </div>
     </main>
 </div>

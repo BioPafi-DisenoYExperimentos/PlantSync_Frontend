@@ -71,7 +71,7 @@ export const routes: Routes = [
                 children: guidesRoutes
             },
             {
-                path: 'configuration',
+                path: 'config',
                 children: configRoutes
             }
         ]
