@@ -1,129 +1,121 @@
 /* Importar las fuentes usadas en la landing page */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
 
-/* Fuente base y transición global */
+:root {
+    /* PlantSync Botanical Color Palette (Landing Page) */
+    --background: oklch(0.98 0.005 120);
+    --foreground: oklch(0.20 0.02 150);
+
+    --card: oklch(0.99 0.003 120);
+    --card-foreground: oklch(0.20 0.02 150);
+
+    /* Deep forest green - Primary brand */
+    --primary: oklch(0.35 0.08 155);
+    --primary-foreground: oklch(0.98 0.005 120);
+
+    /* Sage green - Secondary */
+    --secondary: oklch(0.88 0.03 140);
+    --secondary-foreground: oklch(0.25 0.04 150);
+
+    /* Botanical green - Accent */
+    --accent: oklch(0.55 0.12 145);
+    --accent-foreground: oklch(0.98 0.005 120);
+
+    --border: oklch(0.90 0.02 130);
+    --input: oklch(0.92 0.01 130);
+    --ring: oklch(0.55 0.12 145);
+
+    --radius: 0.75rem; /* 12px */
+
+    /* Sidebar specific */
+    --sidebar-bg: oklch(0.96 0.01 130);
+    --sidebar-foreground: oklch(0.20 0.02 150);
+    --sidebar-hover: oklch(0.92 0.02 140);
+    --sidebar-hover-text: oklch(0.25 0.04 150);
+    --sidebar-border: oklch(0.90 0.02 130);
+}
+
+/* Modo oscuro (se activa añadiendo la clase 'dark-mode' al <body> o elemento principal) */
+.dark-mode {
+    --background: oklch(0.15 0.02 150);
+    --foreground: oklch(0.95 0.005 120);
+
+    --card: oklch(0.18 0.02 150);
+    --card-foreground: oklch(0.95 0.005 120);
+
+    --primary: oklch(0.65 0.12 145);
+    --primary-foreground: oklch(0.15 0.02 150);
+
+    --secondary: oklch(0.25 0.03 150);
+    --secondary-foreground: oklch(0.90 0.01 130);
+
+    --accent: oklch(0.55 0.12 145);
+    --accent-foreground: oklch(0.95 0.005 120);
+
+    --border: oklch(0.28 0.02 150);
+    --input: oklch(0.25 0.02 150);
+    --ring: oklch(0.55 0.12 145);
+
+    --sidebar-bg: oklch(0.18 0.02 150);
+    --sidebar-foreground: oklch(0.95 0.005 120);
+    --sidebar-hover: oklch(0.25 0.03 150);
+    --sidebar-hover-text: oklch(0.90 0.01 130);
+    --sidebar-border: oklch(0.28 0.02 150);
+}
+
 body {
     font-family: 'Outfit', 'Inter', system-ui, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--background);
+    color: var(--foreground);
     transition: background-color 0.3s ease, color 0.3s ease;
     margin: 0;
     padding: 0;
 }
 
-/* Variables por defecto (modo claro) usando la paleta del Landing Page */
-:root {
-    --bg-color: oklch(0.98 0.005 120);
-    --text-color: oklch(0.20 0.02 150);
-    --card-bg: oklch(0.99 0.003 120);
-    --input-bg: oklch(0.92 0.01 130);
-    --button-bg: oklch(0.35 0.08 155); /* Deep forest green */
-    --button-text: oklch(0.98 0.005 120);
-    --border-color: oklch(0.90 0.02 130);
-
-    /* Variables adicionales para el Sidebar */
-    --sidebar-bg: oklch(0.96 0.01 130);
-    --sidebar-text: oklch(0.20 0.02 150);
-    --sidebar-hover: oklch(0.88 0.03 140); /* Sage green */
-    --sidebar-hover-text: oklch(0.25 0.04 150);
+/* Organic gradient backgrounds de tu Landing */
+.gradient-organic {
+    background: linear-gradient(135deg, oklch(0.98 0.005 120) 0%, oklch(0.94 0.02 130) 50%, oklch(0.92 0.03 140) 100%);
 }
 
-/* Variables para modo oscuro */
-.dark-mode {
-    --bg-color: oklch(0.15 0.02 150);
-    --text-color: oklch(0.95 0.005 120);
-    --card-bg: oklch(0.18 0.02 150);
-    --input-bg: oklch(0.25 0.02 150);
-    --button-bg: oklch(0.55 0.12 145); /* Botanical green accent */
-    --button-text: oklch(0.15 0.02 150);
-    --border-color: oklch(0.28 0.02 150);
-
-    /* Variables adicionales para el Sidebar */
-    --sidebar-bg: oklch(0.18 0.02 150);
-    --sidebar-text: oklch(0.95 0.005 120);
-    --sidebar-hover: oklch(0.25 0.03 150);
-    --sidebar-hover-text: oklch(0.90 0.01 130);
+.dark-mode .gradient-organic {
+    background: linear-gradient(135deg, oklch(0.15 0.02 150) 0%, oklch(0.18 0.025 155) 50%, oklch(0.20 0.03 160) 100%);
 }
 
-/* Layouts y contenedores */
-.container {
-    padding: 1rem;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-.main-content {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.contact-section {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Tarjetas reutilizables */
-.card {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    padding: 1.5rem;
-    border-radius: 0.75rem; /* Ajustado al border-radius de la landing (12px) */
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
-}
-
-/* Botones */
-.btn {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    padding: 0.5rem 1.25rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* Inputs, selects, textareas */
+/* Inputs globales consistentes */
 input, textarea, select {
-    background-color: var(--input-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 0.6rem 1rem;
+    background-color: var(--input);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
     transition: all 0.3s ease;
     font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 input:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: var(--button-bg);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--button-bg) 20%, transparent);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
-/* Utilidad para transición general */
-.transition-all {
-    transition: all 0.3s ease;
-}
-
-/* Botón de modo oscuro */
-.dark-mode-toggle {
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    font-weight: 500;
+/* Botones globales */
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
 }
