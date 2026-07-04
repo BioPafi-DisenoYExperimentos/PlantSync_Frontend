@@ -1,6 +1,6 @@
 export const environment = {
 
-    BASE_URL: 'http://localhost:8080/api/v1',
+    BASE_URL: 'http://localhost:8090/api/v1',
     ENDPOINT_PATH_PLANTS: '/plants',
     ENDPOINT_PATH_TASKS: '/tasks',
     ENDPOINT_PATH_WEATHER_TIPS: '/weatherTips',

@@ -70,10 +70,12 @@ export class RegisterComponent {
       return;
     }
 
-    // Validate simulated payment data
-    if (!this.cardName || !this.cardNumber || !this.expiryDate || !this.cvv) {
-      this.error = 'Please complete the simulated card information.';
-      return;
+    // Validate simulated payment data (only if not basic plan)
+    if (this.selectedPlan !== 'basic') {
+      if (!this.cardName || !this.cardNumber || !this.expiryDate || !this.cvv) {
+        this.error = 'Please complete the simulated card information.';
+        return;
+      }
     }
 
     this.error = '';
