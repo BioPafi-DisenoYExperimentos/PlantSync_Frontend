@@ -6,6 +6,12 @@
                 <p>Ingresa tus datos para continuar en PlantSync</p>
             </div>
 
+            @if (error) {
+                <div class="error-message" style="color: #d32f2f; background-color: #ffebee; border: 1px solid #ffcdd2; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+                    <span>⚠️</span> {{ error }}
+                </div>
+            }
+
             <form (ngSubmit)="login()">
                 <div class="form-group">
                     <label>Correo Electrónico</label>
