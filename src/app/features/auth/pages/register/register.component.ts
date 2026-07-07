@@ -26,6 +26,12 @@ export class RegisterComponent {
   /** Account password */
   password = '';
 
+  /** Age of the user */
+  age: number | null = null;
+
+  /** Gender of the user */
+  gender = '';
+
   /** Error message for validation or registration failure */
   error = '';
 
@@ -65,15 +71,17 @@ export class RegisterComponent {
    */
   register(): void {
     // Validate user information
-    if (!this.name || !this.email || !this.password) {
+    if (!this.name || !this.email || !this.password || this.age === null || !this.gender) {
       this.error = 'Please complete all required fields.';
       return;
     }
 
-    // Validate simulated payment data
-    if (!this.cardName || !this.cardNumber || !this.expiryDate || !this.cvv) {
-      this.error = 'Please complete the simulated card information.';
-      return;
+    // Validate simulated payment data (only if not basic plan)
+    if (this.selectedPlan !== 'basic') {
+      if (!this.cardName || !this.cardNumber || !this.expiryDate || !this.cvv) {
+        this.error = 'Please complete the simulated card information.';
+        return;
+      }
     }
 
     this.error = '';
@@ -83,7 +91,9 @@ export class RegisterComponent {
       name: this.name,
       email: this.email,
       password: this.password,
-      subscriptionPlan: this.selectedPlan
+      subscriptionPlan: this.selectedPlan,
+      age: this.age,
+      gender: this.gender
     }).subscribe({
       next: (createdUser) => {
         const userId = createdUser.id;

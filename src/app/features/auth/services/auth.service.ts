@@ -23,6 +23,8 @@ export class AuthService extends BaseService<User> {
         email: string;
         password: string;
         subscriptionPlan: string;
+        age?: number | null;
+        gender?: string;
     }): Observable<User> {
         return this.http.post<User>(`${this.apiUrl}/sign-up`, user);
     }
